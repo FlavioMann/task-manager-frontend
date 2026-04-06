@@ -28,58 +28,6 @@ Interface web para gerenciamento de tarefas com suporte a colaboração entre us
 
 ---
 
-## 📁 Estrutura do projeto
-
-```
-src/
-├── assets/
-│   └── images/              # Imagens estáticas
-├── components/
-│   ├── icons/               # Ícones SVG como componentes Vue
-│   ├── tasks/               # Componentes de tarefas
-│   │   ├── TaskCard.vue
-│   │   ├── TaskStatusBadge.vue
-│   │   ├── MetricCard.vue
-│   │   ├── MetricsWidget.vue
-│   │   ├── CreateTaskModal.vue
-│   │   ├── DeleteTaskModal.vue
-│   │   └── ShareTaskModal.vue
-│   └── ui/                  # Componentes reutilizáveis
-│       ├── AppIcon.vue      # Ícone dinâmico por nome
-│       ├── AppLayout.vue    # Layout com header e nav
-│       ├── BaseButton.vue
-│       ├── BaseInput.vue
-│       ├── BaseModal.vue
-│       └── ToastContainer.vue
-├── lib/
-│   └── api.ts               # Instância axios configurada
-├── router/
-│   └── index.ts             # Rotas e guards de navegação
-├── services/
-│   ├── authService.ts       # POST /sessions
-│   ├── userService.ts       # POST /users
-│   ├── taskService.ts       # CRUD /tasks
-│   ├── categoryService.ts   # POST /categories
-│   └── metricsService.ts    # GET /metrics
-├── stores/
-│   ├── auth.ts              # Autenticação e JWT
-│   ├── tasks.ts             # Estado das tarefas
-│   ├── metrics.ts           # Estado das métricas
-│   └── toast.ts             # Notificações globais
-├── types/
-│   ├── auth.ts              # User, AuthUser, LoginPayload...
-│   └── task.ts              # Task, Metrics, TaskStatus...
-└── views/
-    ├── auth/
-    │   ├── LoginView.vue
-    │   └── RegisterView.vue
-    └── tasks/
-        ├── TasksView.vue
-        └── ReportsView.vue
-```
-
----
-
 ## 🚀 Como rodar
 
 ### Pré-requisitos
