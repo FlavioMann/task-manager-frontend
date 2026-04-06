@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { metricsService } from '@/services/metricsService'
+import { useToastStore } from '@/stores/toast'
 import type { Metrics } from '@/types/task'
 
 export const useMetricsStore = defineStore('metrics', () => {
@@ -11,6 +12,10 @@ export const useMetricsStore = defineStore('metrics', () => {
     loading.value = true
     try {
       metrics.value = await metricsService.get()
+    } catch (error) {
+      const toast = useToastStore()
+      toast.error('Erro ao carregar métricas. Tente novamente.')
+      throw error
     } finally {
       loading.value = false
     }

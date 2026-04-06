@@ -26,7 +26,7 @@ function validate() {
 
   if (!form.name) errors.name = 'Nome é obrigatório'
   if (!form.email) errors.email = 'E-mail é obrigatório'
-  else if (!/^[^@]+@[^@]+.[^@]+$/.test(form.email)) errors.email = 'E-mail inválido'
+  else if (!/^[^@]+@[^@]+\.[^@]+$/.test(form.email)) errors.email = 'E-mail inválido'
   if (!form.password) errors.password = 'Senha é obrigatória'
   else if (form.password.length < 6) errors.password = 'Mínimo 6 caracteres'
   if (!form.confirmPassword) errors.confirmPassword = 'Confirme a senha'

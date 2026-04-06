@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { taskService } from '@/services/taskService'
+import { useToastStore } from '@/stores/toast'
 import type { Task, CreateTaskPayload, TaskStatus } from '@/types/task'
 
 export const useTasksStore = defineStore('tasks', () => {
@@ -11,6 +12,9 @@ export const useTasksStore = defineStore('tasks', () => {
     loading.value = true
     try {
       tasks.value = await taskService.getAll()
+    } catch {
+      const toast = useToastStore()
+      toast.error('Erro ao carregar tarefas. Tente novamente.')
     } finally {
       loading.value = false
     }

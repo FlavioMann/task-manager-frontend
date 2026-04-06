@@ -27,7 +27,7 @@ function reset() {
 function validate() {
   emailError.value = ''
   if (!email.value) emailError.value = 'E-mail é obrigatório'
-  else if (!/^[^@]+@[^@]+.[^@]+$/.test(email.value)) emailError.value = 'E-mail inválido'
+  else if (!/^[^@]+@[^@]+\.[^@]+$/.test(email.value)) emailError.value = 'E-mail inválido'
   return !emailError.value
 }
 

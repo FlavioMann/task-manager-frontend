@@ -10,6 +10,7 @@ export interface Toast {
 }
 
 let nextId = 0
+const timers = new Map<number, ReturnType<typeof setTimeout>>()
 
 export const useToastStore = defineStore('toast', () => {
   const toasts = ref<Toast[]>([])
@@ -17,10 +18,13 @@ export const useToastStore = defineStore('toast', () => {
   function add(message: string, type: ToastType = 'info', duration = 4000) {
     const id = ++nextId
     toasts.value.push({ id, message, type })
-    setTimeout(() => remove(id), duration)
+    timers.set(id, setTimeout(() => remove(id), duration))
   }
 
   function remove(id: number) {
+    const timer = timers.get(id)
+    if (timer) clearTimeout(timer)
+    timers.delete(id)
     toasts.value = toasts.value.filter((t) => t.id !== id)
   }
 

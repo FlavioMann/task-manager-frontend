@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import { authService } from '@/services/authService'
 import { userService } from '@/services/userService'
 import { setAuthToken, clearAuthToken } from '@/lib/api'
-import type { User, AuthUser, LoginPayload, RegisterPayload } from '@/types/auth'
+import type { AuthUser, LoginPayload, RegisterPayload } from '@/types/auth'
 
 const TOKEN_KEY = 'auth_token'
 
@@ -21,14 +21,19 @@ function decodeTokenId(token: string): string | null {
 export const useAuthStore = defineStore('auth', () => {
   const token = ref<string | null>(localStorage.getItem(TOKEN_KEY))
 
-  const user = ref<AuthUser | null>(
-    token.value ? { id: decodeTokenId(token.value) ?? '' } : null,
-  )
-
   const isLoggedIn = computed(() => token.value !== null)
 
+  const user = ref<AuthUser | null>(null)
+
   if (token.value) {
-    setAuthToken(token.value)
+    const userId = decodeTokenId(token.value)
+    if (userId) {
+      user.value = { id: userId }
+      setAuthToken(token.value)
+    } else {
+      token.value = null
+      localStorage.removeItem(TOKEN_KEY)
+    }
   }
 
   async function login(payload: LoginPayload) {
