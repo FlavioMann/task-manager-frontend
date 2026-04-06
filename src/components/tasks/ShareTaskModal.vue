@@ -37,6 +37,7 @@ async function handleSubmit() {
   serverError.value = ''
   try {
     await tasksStore.shareTask(props.taskId, email.value)
+    await tasksStore.fetchTasks()
     toast.success(`Tarefa compartilhada com ${email.value}!`)
     reset()
     emit('close')
