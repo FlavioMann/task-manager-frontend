@@ -10,8 +10,7 @@ import AppIcon from '@/components/ui/AppIcon.vue'
 const metricsStore = useMetricsStore()
 const tasksStore = useTasksStore()
 
-// Agrupa tarefas por categoria para o breakdown
-const tasksByCategory = computed(() => {
+const tasksByCategory= computed(() => {
   const map = new Map<string, { name: string; total: number; completed: number }>()
 
   for (const task of tasksStore.tasks) {
@@ -26,8 +25,7 @@ const tasksByCategory = computed(() => {
   return Array.from(map.values()).sort((a, b) => b.total - a.total)
 })
 
-// Últimas 5 tarefas atualizadas
-const recentTasks = computed(() =>
+const recentTasks= computed(() =>
   [...tasksStore.tasks]
     .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
     .slice(0, 5),
@@ -42,13 +40,11 @@ onMounted(() => {
 <template>
   <AppLayout>
     <div class="space-y-8">
-      <!-- Título -->
       <div>
         <h1 class="text-xl font-bold text-gray-900">Relatórios</h1>
         <p class="mt-1 text-sm text-gray-500">Visão geral do progresso das suas tarefas</p>
       </div>
 
-      <!-- Cards de métricas -->
       <section>
         <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">Resumo</h2>
         <div v-if="metricsStore.metrics" class="grid grid-cols-2 gap-3 md:grid-cols-5">
@@ -70,7 +66,6 @@ onMounted(() => {
         </div>
       </section>
 
-      <!-- Tarefas por categoria -->
       <section>
         <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">Por categoria</h2>
         <div v-if="tasksStore.tasks.length > 0" class="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">
@@ -98,7 +93,6 @@ onMounted(() => {
         </div>
       </section>
 
-      <!-- Atividade recente -->
       <section>
         <h2 class="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">Atividade recente</h2>
         <div v-if="recentTasks.length > 0" class="rounded-xl border border-gray-100 bg-white shadow-sm overflow-hidden">

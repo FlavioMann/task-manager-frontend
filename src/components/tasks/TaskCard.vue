@@ -50,7 +50,6 @@ async function handleStatusChange(event: Event) {
   <div
     :class="['rounded-xl border border-gray-200 border-l-4 bg-white p-5 shadow-sm transition hover:shadow-md', borderColors[task.status]]"
   >
-    <!-- Header -->
     <div class="flex items-start justify-between gap-2">
       <div class="flex-1">
         <h3 class="font-semibold text-gray-900">{{ task.title }}</h3>
@@ -61,14 +60,12 @@ async function handleStatusChange(event: Event) {
       <TaskStatusBadge :status="task.status" />
     </div>
 
-    <!-- Category -->
     <div v-if="task.category" class="mt-3">
       <span class="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-0.5 text-xs text-gray-600">
         {{ task.category.name }}
       </span>
     </div>
 
-    <!-- Footer -->
     <div class="mt-4 flex flex-col gap-2 border-t pt-3 sm:flex-row sm:items-center sm:justify-between">
       <div class="flex items-center gap-1 text-xs text-gray-400">
         <AppIcon name="UserIcon" class="size-3.5 shrink-0" />
@@ -79,7 +76,6 @@ async function handleStatusChange(event: Event) {
       </div>
 
       <div class="flex items-center gap-2">
-        <!-- Share (only owner) -->
         <button
           v-if="isOwner"
           class="rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-blue-600"
@@ -92,7 +88,6 @@ async function handleStatusChange(event: Event) {
           </svg>
         </button>
 
-        <!-- Delete (only owner) -->
         <button
           v-if="isOwner"
           class="rounded p-1 text-gray-400 hover:bg-red-50 hover:text-red-500"
@@ -102,7 +97,6 @@ async function handleStatusChange(event: Event) {
           <AppIcon name="TrashIcon" class="size-4" />
         </button>
 
-        <!-- Status select (only owner) -->
         <select
           v-if="isOwner"
           :value="task.status"

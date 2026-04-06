@@ -35,7 +35,6 @@ onMounted(() => tasksStore.fetchTasks())
 <template>
   <AppLayout>
     <div class="space-y-6">
-      <!-- Tasks header -->
       <div class="flex items-center justify-between">
         <h1 class="text-xl font-bold text-gray-900">Minhas tarefas</h1>
         <BaseButton @click="showCreateModal = true">
@@ -44,7 +43,6 @@ onMounted(() => tasksStore.fetchTasks())
         </BaseButton>
       </div>
 
-      <!-- Filter tabs -->
       <div class="flex w-full overflow-x-auto rounded-lg bg-gray-100 p-1 sm:w-fit">
         <button
           v-for="f in filters"
@@ -61,12 +59,10 @@ onMounted(() => tasksStore.fetchTasks())
         </button>
       </div>
 
-      <!-- Loading -->
       <div v-if="tasksStore.loading" class="grid gap-4 sm:grid-cols-2">
         <div v-for="i in 4" :key="i" class="h-36 rounded-xl bg-gray-100 animate-pulse" />
       </div>
 
-      <!-- Tasks grid -->
       <div v-else-if="filteredTasks.length > 0" class="grid gap-4 sm:grid-cols-2">
         <TaskCard
           v-for="task in filteredTasks"
@@ -76,7 +72,6 @@ onMounted(() => tasksStore.fetchTasks())
         />
       </div>
 
-      <!-- Empty state -->
       <div v-else class="rounded-xl border border-dashed border-gray-200 bg-white py-16 text-center">
         <AppIcon name="ClipboardCheckIcon" class="mx-auto size-10 text-gray-300" />
         <p class="mt-3 text-sm font-medium text-gray-500">Nenhuma tarefa encontrada</p>
@@ -84,7 +79,6 @@ onMounted(() => tasksStore.fetchTasks())
       </div>
     </div>
 
-    <!-- Modals -->
     <CreateTaskModal :open="showCreateModal" @close="showCreateModal = false" />
     <ShareTaskModal
       :open="shareTaskId !== null"

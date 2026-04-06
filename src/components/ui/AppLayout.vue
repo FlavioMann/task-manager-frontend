@@ -23,7 +23,6 @@ function handleLogout() {
   <div class="min-h-screen bg-gray-50">
     <header class="border-b bg-white">
       <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
-        <!-- Logo -->
         <div class="flex items-center gap-2">
           <div class="flex size-8 items-center justify-center rounded-lg bg-blue-600">
             <AppIcon name="ClipboardCheckIcon" class="size-4 text-white" />
@@ -31,7 +30,6 @@ function handleLogout() {
           <span class="hidden text-base font-bold text-gray-900 sm:inline">Task Manager</span>
         </div>
 
-        <!-- Nav -->
         <nav class="flex items-center gap-1">
           <RouterLink
             v-for="item in navItems"
@@ -49,7 +47,6 @@ function handleLogout() {
           </RouterLink>
         </nav>
 
-        <!-- Logout -->
         <BaseButton variant="ghost" @click="handleLogout">
           <AppIcon name="LogOutIcon" class="size-4" />
           <span class="hidden sm:inline">Sair</span>

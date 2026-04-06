@@ -50,7 +50,6 @@ async function handleRegister() {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const data = error.response?.data
-      // Erros de campo vindos do Zod (ex: { errors: [{ field, message }] })
       if (data?.errors && Array.isArray(data.errors)) {
         for (const fieldError of data.errors) {
           const field = fieldError.field as keyof typeof errors
@@ -71,7 +70,6 @@ async function handleRegister() {
 <template>
   <div class="flex min-h-screen items-center justify-center bg-gray-50 px-4">
     <div class="w-full max-w-sm space-y-8">
-      <!-- Logo / Título -->
       <div class="text-center">
         <div class="mx-auto mb-4 flex size-12 items-center justify-center rounded-xl bg-blue-600">
           <AppIcon name="ClipboardCheckIcon" class="size-6 text-white" />
@@ -80,12 +78,10 @@ async function handleRegister() {
         <p class="mt-1 text-sm text-gray-500">Crie sua conta gratuitamente</p>
       </div>
 
-      <!-- Erro do servidor -->
       <div v-if="serverError" class="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
         {{ serverError }}
       </div>
 
-      <!-- Formulário -->
       <form class="space-y-4" @submit.prevent="handleRegister">
         <BaseInput
           v-model="form.name"
@@ -120,7 +116,6 @@ async function handleRegister() {
         </BaseButton>
       </form>
 
-      <!-- Link para login -->
       <p class="text-center text-sm text-gray-500">
         Já tem uma conta?
         <RouterLink to="/login" class="font-medium text-blue-600 hover:text-blue-700">

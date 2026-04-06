@@ -23,7 +23,6 @@ onMounted(() => metricsStore.fetchMetrics())
     />
   </div>
 
-  <!-- Skeleton -->
   <div v-else class="grid grid-cols-2 gap-3 md:grid-cols-5">
     <div v-for="i in 4" :key="i" class="h-20 rounded-xl bg-gray-100 animate-pulse" />
     <div class="col-span-2 h-20 rounded-xl bg-gray-100 animate-pulse md:col-span-1" />

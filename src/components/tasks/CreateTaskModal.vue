@@ -14,7 +14,6 @@ const emit = defineEmits<{ close: [] }>()
 const tasksStore = useTasksStore()
 const toast = useToastStore()
 
-// Deriva categorias únicas das tarefas já carregadas
 const existingCategories = computed(() => {
   const map = new Map<string, string>()
   for (const task of tasksStore.tasks) {
@@ -59,7 +58,6 @@ async function handleSubmit() {
   try {
     let categoryId: string | undefined
 
-    // Cria categoria nova primeiro, se necessário
     if (isNewCategory.value && form.newCategoryName) {
       const { categoryId: newId } = await categoryService.create(form.newCategoryName)
       categoryId = newId
@@ -119,7 +117,6 @@ function handleClose() {
         />
       </div>
 
-      <!-- Categoria -->
       <div class="flex flex-col gap-1 pb-2">
         <label class="text-sm font-medium text-gray-700">
           Categoria <span class="text-gray-400">(opcional)</span>
@@ -136,7 +133,6 @@ function handleClose() {
         </select>
       </div>
 
-      <!-- Input para nova categoria -->
       <BaseInput
         v-if="isNewCategory"
         v-model="form.newCategoryName"

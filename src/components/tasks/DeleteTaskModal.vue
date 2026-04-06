@@ -41,7 +41,6 @@ async function handleConfirm() {
 <template>
   <BaseModal title="Excluir tarefa" :open="open" @close="emit('close')">
     <div class="space-y-4">
-      <!-- Ícone de aviso -->
       <div class="flex items-start gap-3">
         <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-red-100">
           <AppIcon name="TrashIcon" class="size-5 text-red-600" />
@@ -55,7 +54,6 @@ async function handleConfirm() {
         </div>
       </div>
 
-      <!-- Ações -->
       <div class="flex justify-end gap-2 pt-2">
         <BaseButton variant="secondary" :disabled="loading" @click="emit('close')">
           Cancelar
