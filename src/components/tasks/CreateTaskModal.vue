@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { reactive, ref, computed } from 'vue'
+import { reactive, ref, computed, onMounted } from 'vue'
 import axios from 'axios'
 import { useTasksStore } from '@/stores/tasks'
 import { useToastStore } from '@/stores/toast'
+import { useCategoriesStore } from '@/stores/categories'
 import { categoryService } from '@/services/categoryService'
 import BaseModal from '@/components/ui/BaseModal.vue'
 import BaseInput from '@/components/ui/BaseInput.vue'
@@ -13,15 +14,10 @@ const emit = defineEmits<{ close: [] }>()
 
 const tasksStore = useTasksStore()
 const toast = useToastStore()
+const categoriesStore = useCategoriesStore()
 
-const existingCategories = computed(() => {
-  const map = new Map<string, string>()
-  for (const task of tasksStore.tasks) {
-    if (task.categoryId && task.category) {
-      map.set(task.categoryId, task.category.name)
-    }
-  }
-  return Array.from(map.entries()).map(([id, name]) => ({ id, name }))
+onMounted(() => {
+  if (categoriesStore.categories.length === 0) categoriesStore.fetchCategories()
 })
 
 const form = reactive({ title: '', description: '', categoryId: '', newCategoryName: '' })
@@ -61,6 +57,7 @@ async function handleSubmit() {
     if (isNewCategory.value && form.newCategoryName) {
       const { categoryId: newId } = await categoryService.create(form.newCategoryName)
       categoryId = newId
+      await categoriesStore.fetchCategories()
     } else if (form.categoryId && form.categoryId !== '') {
       categoryId = form.categoryId
     }
@@ -126,7 +123,7 @@ function handleClose() {
           class="rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
         >
           <option value="">Sem categoria</option>
-          <option v-for="cat in existingCategories" :key="cat.id" :value="cat.id">
+          <option v-for="cat in categoriesStore.categories" :key="cat.id" :value="cat.id">
             {{ cat.name }}
           </option>
           <option value="__new__">+ Nova categoria</option>

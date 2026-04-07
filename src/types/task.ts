@@ -25,6 +25,14 @@ export interface Category {
   name: string
 }
 
+export interface CategoryWithCount {
+  id: string
+  name: string
+  _count: {
+    tasks: number
+  }
+}
+
 export interface Metrics {
   totalTasks: number
   completedTasks: number

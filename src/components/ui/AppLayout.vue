@@ -10,6 +10,7 @@ const auth = useAuthStore()
 
 const navItems = [
   { name: 'tasks', label: 'Tarefas', icon: 'ClipboardCheckIcon' },
+  { name: 'categories', label: 'Categorias', icon: 'FolderIcon' },
   { name: 'reports', label: 'Relatórios', icon: 'ChartBarIcon' },
 ]
 
