@@ -79,14 +79,6 @@ npm run format
 
 ---
 
-## 🔐 Autenticação
-
-O JWT é armazenado no `localStorage` e injetado automaticamente em todas as requisições via header `Authorization: Bearer <token>`. O ID do usuário é extraído do payload do token para verificação de ownership nas tarefas.
-
-As rotas protegidas redirecionam para `/login` caso o token não esteja presente. Rotas de convidado (login/register) redirecionam para `/tasks` caso o usuário já esteja autenticado.
-
----
-
 ## 🔗 Integração com a API
 
 | Método | Rota | Descrição | Auth |
